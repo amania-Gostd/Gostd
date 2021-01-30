@@ -1,0 +1,70 @@
+ss = '''import configparser
+import os
+import urllib.request
+import glob
+path = '*.bat'
+config = configparser.ConfigParser()
+config.read('config.ini')
+store = configparser.ConfigParser()
+store.read('store.ini')
+def install(app):
+    try:
+        d = store["Defalt"][app]
+        urllib.request.urlretrieve(d,f"{app}.py")
+        c = open(f"{app}.bat","w")
+        c.write(f"@echo off \n {app}.py")
+    except KeyError as e:
+        print(f"{app}は存在しません")
+
+while True:
+    c = input("ASTOM>>")
+    if c == "app":
+        if config["Defalt"]["appcmd"] == "None":
+            print("指定されていないアプリケーション")
+        else:
+            if config["Defalt"]["Unsignedapplication"] == "True":
+                if config["Defalt"]["nostoreapp"] == "True":
+                    os.system(config["Defalt"]["appcmd"])
+                else:
+                    print("nostoreappが許可されていません")
+            else:
+                print("Unsignedapplicationが許可されていません")
+    elif c == "store":
+        print("""
+OSPAStore
+u = アップデート
+s = ストアを起動""")
+        s = input(">")
+        if s == "u":
+            print("アップデート中.......")
+            urllib.request.urlretrieve("https://github.com/amzon-0021/store/raw/main/store.ini", "store.ini")
+            store.read('store.ini')
+        elif s == "s":
+            print("アプリ一覧")
+            for key in store['Defalt']:
+                print(key)
+            install(input("インストールするアプリ名>>"))
+    elif c == "setting":
+        s = open("config.ini","r")
+        s = s.read()
+        print(s)
+    elif c == "start":
+        print("インストール済みアプリケーション")
+        file_list = glob.glob(path, recursive=True)
+        file_list = [os.path.basename(r) for r in file_list]
+        for x in file_list:
+          print(x.replace('.bat', ''))
+        s = input("起動するアプリケーションを入力>>")
+        os.system(s)
+
+'''
+print("""
+ASTOM OS Installer(BuildVER.12)
+DOS-BETAからアップグレードしますか？""")
+c = input("実行するには y>")
+if c == "y":
+    print("インストール中")
+    s = open("DOS.py","w","utf-8")
+    s.write(ss)
+    print("インストール完了 再起動して下さい")
+    input()
