@@ -37,7 +37,7 @@ s = ストアを起動""")
         s = input(">")
         if s == "u":
             print("アップデート中.......")
-            urllib.request.urlretrieve("https://github.com/amzon-0021/store/raw/main/store.ini", "store.ini")
+            urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/store.ini", "store.ini")
             store.read('store.ini')
         elif s == "s":
             print("アプリ一覧")
