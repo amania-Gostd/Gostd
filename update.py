@@ -11,7 +11,7 @@ def install(app):
     except KeyError as e:
         print(f"{app}は存在しません")
 print("使用可能なAUIFを検索しています")
-urllib.request.urlretrieve("https://github.com/amzon-0021/store/raw/main/update.ini", "update.ini")
+urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/update.ini", "update.ini")
 config = configparser.ConfigParser()
 ###config.read('update.ini')
 config.readfp(codecs.open("update.ini", "r", "utf8"))
