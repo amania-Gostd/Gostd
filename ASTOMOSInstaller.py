@@ -12,7 +12,7 @@ def install(app):
         d = store["Defalt"][app]
         urllib.request.urlretrieve(d,f"{app}.py")
         c = open(f"{app}.bat","w")
-        c.write(f"@echo off \n {app}.py")
+        c.write(f"""@echo off \n {app}.py""")
     except KeyError as e:
         print(f"{app}は存在しません")
 
