@@ -64,7 +64,7 @@ DOS-BETAからアップグレードしますか？""")
 c = input("実行するには y>")
 if c == "y":
     print("インストール中")
-    s = open("DOS.py","w","utf-8")
+    s = open("DOS.py","w",encoding="utf-8")
     s.write(ss)
     print("インストール完了 再起動して下さい")
     input()
