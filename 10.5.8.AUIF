@@ -10,9 +10,10 @@ store.read('store.ini')
 def install(app):
     try:
         d = store["Defalt"][app]
-        urllib.request.urlretrieve(d,f"{app}.py")
+        urllib.request.urlretrieve(d,f"app/{app}.py")
         c = open(f"{app}.bat","w")
         c.write(f"""@echo off
+app\{app}.py""")
 {app}.py""")
     except KeyError as e:
         print(f"{app}は存在しません")
