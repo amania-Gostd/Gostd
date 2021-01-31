@@ -3,11 +3,22 @@ print("AUIFファイルを使用してアップデートをします")
 import configparser
 import codecs
 import urllib.request
+def ini(v):
+    i = f'''[Defalt]
+application = True
+Unsignedapplication = false
+nostoreapp = false
+appcmd = None
+Ver = {v}'''
+    return i
 def install(app):
     try:
-        open("test.py","w")
         d = config["Defalt"][app]
         urllib.request.urlretrieve(d, "DOS.py")
+        a = ini(app)
+        s = open("config.ini","w")
+        s.write(a)
+        s.close()
     except KeyError as e:
         print(f"{app}は存在しません")
 print("使用可能なAUIFを検索しています")
