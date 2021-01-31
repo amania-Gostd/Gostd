@@ -58,7 +58,7 @@ s = ストアを起動""")
         s = input("起動するアプリケーションを入力>>")
         os.system(s)
     elif c == "system":
-    v = config["Defalt"]["Ver"]
+        v = config["Defalt"]["Ver"]
         print(f"""
 ASTOM OS {v}
 Build 15TWR
