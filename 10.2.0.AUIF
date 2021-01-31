@@ -14,6 +14,8 @@ def install(app):
         c = open(f"{app}.bat","w")
         c.write(f"""@echo off
 app\{app}.py""")
+    except KeyError as e:
+        print(f"{app}は存在しません")
 
 while True:
     c = input("DOS-Beta>>")
