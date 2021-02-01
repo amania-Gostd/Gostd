@@ -12,15 +12,22 @@ appcmd = None
 Ver = {v}'''
     return i
 def install(app):
-    try:
-        d = config["Defalt"][app]
-        urllib.request.urlretrieve(d, "DOS.py")
-        a = ini(app)
-        s = open("config.ini","w")
-        s.write(a)
-        s.close()
-    except KeyError as e:
-        print(f"{app}は存在しません")
+    if app == "new":
+        s = open("new.aup","r",encoding="utf-8")
+        s = s.read()
+        d = open("DOS.py","w",encoding="utf-8")
+        d.write(s)
+        d.close()
+    else:
+        try:
+            d = config["Defalt"][app]
+            urllib.request.urlretrieve(d, "DOS.py")
+            a = ini(app)
+            s = open("config.ini","w")
+            s.write(a)
+            s.close()
+        except KeyError as e:
+            print(f"{app}は存在しません")
 print("使用可能なAUIFを検索しています")
 urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/update.ini", "update.ini")
 config = configparser.ConfigParser()
