@@ -1,0 +1,89 @@
+import configparser
+import os
+import urllib.request
+import glob
+os.system("title ASTOM-DOS && cls")
+path = '*.bat'
+config = configparser.ConfigParser()
+config.read('config.ini')
+store = configparser.ConfigParser()
+store.read('store.ini')
+def install(app):
+    try:
+        d = store["Defalt"][app]
+        urllib.request.urlretrieve(d,f"app/{app}.py")
+        c = open(f"app/{app}.bat","w")
+        c.write(f"""@echo off
+app\{app}.py""")
+    except KeyError as e:
+        print(f"{app}は存在しません")
+if config["Defalt"]["AUP"] == "True":
+    print("しばらくお待ちください")
+    urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/aup.ini", "aup.ini")
+    aup = configparser.ConfigParser()
+    aup.read('aup.ini')
+    if config["Defalt"]["Ver"] < aup["Defalt"]["New-Ver"]:
+        v = aup["Defalt"]["New-Ver"]
+        print("最新バージョンが存在しています UpdateするにはStoreからUpdateをインストールしnewと入力してください")
+        print(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF")
+        urllib.request.urlretrieve(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF", "new.aup")
+        
+        
+        
+while True:
+    c = input("ASTOM>>")
+    if c == "app":
+        if config["Defalt"]["appcmd"] == "None":
+            print("指定されていないアプリケーション")
+        else:
+            if config["Defalt"]["Unsignedapplication"] == "True":
+                if config["Defalt"]["nostoreapp"] == "True":
+                    os.system(config["Defalt"]["appcmd"])
+                else:
+                    print("nostoreappが許可されていません")
+            else:
+                print("Unsignedapplicationが許可されていません")
+    elif c == "store":
+        print("""
+u = アップデート
+s = OPAStoreを起動""")
+        s = input(">")
+        if s == "u":
+            print("アップデート中.......")
+            urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/store.ini", "store.ini")
+            store.read('store.ini')
+        elif s == "s":
+            print("""
+=======================OPAStoreマネージャー=======================
+アプリ一覧""")
+            for key in store['Defalt']:
+                print(key)
+            install(input("インストールするアプリ名>>"))
+        else:
+            print("DOSに戻ります")
+    elif c == "setting":
+        s = open("config.ini","r")
+        s = s.read()
+        print(s)
+    elif c == "start":
+        print("インストール済みアプリケーション")
+        file_list = glob.glob("./app/*.bat", recursive=True)
+        file_list = [os.path.basename(r) for r in file_list]
+        for x in file_list:
+          print(x.replace('.bat', ''))
+        s = input("起動するアプリケーションを入力>>")
+        os.system(f"app\{s}")
+    elif c == "system":
+        v = config["Defalt"]["Ver"]
+        print(f"""
+ASTOM OS {v}
+Build BloZen7
+<systemapp>
+OSPAStore v10Beta
+AUIF Loder
+Windows.Batloder
+AUIF ConfigLoder
+Sound destruction
+ASTOM-Recovery-Core
+AUP loder
+""")
