@@ -37,8 +37,8 @@ urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd
 config = configparser.ConfigParser()
 aup = configparser.ConfigParser()
 ###config.read('update.ini')
-config.readfp(codecs.open("system/update.ini", "r", "utf8"))
-aup.readfp(codecs.open("system/aup.ini", "r", "utf8"))
+config.readfp(codecs.open("ST/system/update.ini", "r", "utf8"))
+aup.readfp(codecs.open("ST/system/aup.ini", "r", "utf8"))
 print("ダウンロードするバージョンを選択してください(Ver.10.2以上のみ使用できます)")
 for key in config['Defalt']:
     print(key)
