@@ -83,6 +83,7 @@ s = OPAStoreを起動""")
         print(f"""
 Giga OS {v}
 Build GIga9
+ActivetionKey {d}
 <systemapp>
 OSPAStore v10
 AUIF Loder
