@@ -54,7 +54,7 @@ if c == "i":
         print("インストールしています")
         urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/update.ini", "ST/system/update.ini")
         config = configparser.ConfigParser()
-        config.readfp(codecs.open("update.ini", "r", "utf8"))
+        config.readfp(codecs.open("ST/system/update.ini", "r", "utf8"))
         install("12.0.0")
     else:
         pass
