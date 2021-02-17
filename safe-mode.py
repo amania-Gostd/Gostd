@@ -6,16 +6,11 @@ import shutil
 import os
 os.system("cls")
 print("Booting Recovery")
-print("""Indas-Bootloder[Safe Mode]
-Boot setting
+print("""ASTOM-Terminal[Safe Mode]
+Terminal setting
 =========================================
-[Defalt]
-boot = Basic
-OB = Basic
-[SafeMode]
-boot = Safe
-OS = Recovery
-BootMode = Basic
+ALLD = Safe
+boot = Nomal
 =========================================""")
 time.sleep(5)
 def ini(v):
