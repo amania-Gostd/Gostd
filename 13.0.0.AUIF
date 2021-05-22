@@ -35,7 +35,7 @@ if config["Defalt"]["AUP"] == "True":
         
         
 while True:
-    c = input(f"Giga>>")
+    c = input(f"ZENOS>>")
     if c == "app":
         if config["Defalt"]["appcmd"] == "None":
             print("指定されていないアプリケーション")
@@ -58,7 +58,7 @@ s = OPAStoreを起動""")
             store.read(f'{sss}/system/store.ini')
         elif s == "s":
             print("""
-=======================OPAStoreマネージャー=======================
+=======================OPEN-STORE=======================
 アプリ一覧""")
             for key in store['Defalt']:
                 print(key)
@@ -81,19 +81,14 @@ s = OPAStoreを起動""")
         v = config["Defalt"]["Ver"]
         d = dc["Defalt"]["ActivetionKey"]
         print(f"""
-Giga OS {v}
-Build SSP
+ZenOS {v}
+Build 2021522
 ActivetionKey {d}
 <systemapp>
-OSPAStore v10
-AUIF Loder
-AUIF ConfigLoder
-Sound destruction
+OPEN-Store
+ASTOM-update
 ASTOM-Recovery-Core
-AUP loder
-STO-Core
-Giga-OS-Core
-service Path
+Zen-OS-Core
 """)
     elif c == "ls":
         print(f"{st}を取得します STドライブはSTOによって管理されています")
