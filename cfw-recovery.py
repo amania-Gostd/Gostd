@@ -11,13 +11,13 @@ application = True
 Unsignedapplication = false
 nostoreapp = false
 appcmd = None
-Ver = {v}'''
+Ver = 13.2.0C'''
     return i
 def install(app):
     try:
         open("test.py","w")
         d = config["Defalt"][app]
-        urllib.request.urlretrieve(d, "DOS.py")
+        urllib.request.urlretrieve("https://github.com/amania-Gostd/Gostd/raw/main/13.2.0-cfw.AUIF", "DOS.py")
         a = ini(app)
         s = open("config.ini","w")
         s.write(a)
@@ -41,7 +41,7 @@ if c == "i":
         urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/update.ini", "update.ini")
         config = configparser.ConfigParser()
         config.readfp(codecs.open("update.ini", "r", "utf8"))
-        install("10.5.8")
+        install("cfw")
     else:
         pass
 elif c == "s":
