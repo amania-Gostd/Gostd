@@ -40,9 +40,9 @@ def cmd(c):
 com.Cario.jp com.ZenOS.sus com.gigaos.sus com.astomos.sus com.indasos.sus com.dosbeta.sus com.next.susの著名が使用されています
 Cario V5
 アプリケーションの起動 = app
-アプリケーションストアの起動 = app以外の文字列
+アプリケーションストアの起動 = store
         """)
-        c == input(">>")
+        c = input(">>")
         if c == "app":
             print("インストール済みアプリケーション")
             file_list = glob.glob("./*.cario", recursive=True)
@@ -51,7 +51,7 @@ Cario V5
               print(x.replace('.cario', ''))
             s = input("起動するアプリケーションを入力>>")
             os.system(f"python {s}.cario")
-        else:
+        elif c == "store":
             print("""
 u = active-Repoの変更と更新
 s = Storeを起動""")
