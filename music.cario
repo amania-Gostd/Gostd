@@ -8,11 +8,14 @@ from tkinter import ttk
 from tkinter import *
 from tkinter.ttk import *
 from tkinter import filedialog
+import datetime
 try:
     from mutagen.easyid3 import EasyID3
+    from mutagen.mp3 import MP3
 except:
     os.system("python -m pip install mutagen")
     from mutagen.easyid3 import EasyID3
+    from mutagen.mp3 import MP3
 # 再生/一時停止
 def ply_stop():
     global button_act
@@ -58,11 +61,14 @@ def fp_select():
     # ファイル名のみ表示
     fName = os.path.basename(fPath)
     tags=EasyID3(fPath)
+    print(tags)
     mnam = tags['title'][0]
+    ati = tags['artist'][0]
+    audio = MP3(fPath)
     # ファイルパスor名前をセット
     file1.set(fPath) # 絶対パス
     file2.set(fName) # ファイル名のみ(曲名表示用)
-    mname.set(mnam)
+    mname.set(mnam + "\n" + ati)
     # 選択したファイルを開には絶対パスが必要
 
 
