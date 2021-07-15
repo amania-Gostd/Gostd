@@ -25,7 +25,7 @@ def install(app):
             s.close()
         else:
             d = config["Defalt"][app]
-            urllib.request.urlretrieve(d, "DOS.py")
+            urllib.request.urlretrieve(d, "Next.py")
             a = ini(app)
             s = open("config.ini","w",encoding="utf-8")
             s.write(a)
