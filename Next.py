@@ -122,7 +122,6 @@ Loading......OK
         store.read(f'store.ini')
     install(a) 
 if __name__ == "__main__":
-    print("ONE-Next 2 Beta")
     while True:
         c = "Login"
         if c == "Login":
@@ -137,7 +136,7 @@ Support 2021
 amania Inc. 2015~2021
 Next-SE 2021
 openmedia 2021
-OS: Next 11 Dev
+OS: Next 11 Home
 Login protocol: XNLM
 Video-Driver: NVD
 CPU-Driver: NCD
