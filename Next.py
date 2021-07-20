@@ -103,7 +103,7 @@ Famous content: NEXTOS-DEV-EDITION
 Issue ID: xcv-667-qx7""")
     elif c == "system":
             print("""Next OS 11
-Edition	 Next 11 Developer
+Edition	 Next 11 Home
 update	 21720
 OS build 10.7
 Kernel   One-Next 21720.2 basics
