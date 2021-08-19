@@ -120,11 +120,15 @@ System filer
                 s = open("DS-DOS.py","w",encoding="utf-8")
                 s.write(d)
                 s.close()
+                config.optionxform = lambda option: option
+                config['Defalt'] = {}
+                config.set("Defalt", "Ver", aup["Defalt"]["New-Ver"])
                 s = open(f'{sss}/system/config.zs',"w",encoding="utf-8")
-                s.write(ini(aup["Defalt"]["New-Ver"]))
+                config.write(s)
                 s.close()
         elif config["Defalt"]["Ver"] >= aup["Defalt"]["New-Ver"]:
             print("すでに最新バージョンです")
+                
                 
     else:
         try:
