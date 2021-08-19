@@ -115,7 +115,7 @@ System filer
             urllib.request.urlretrieve(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF", f"{sss}/system/new.oup")
             print("ダウンロードが完了しました　インストールしますか(y)")
             if input(">>>") == "y":
-                d = open("new.oup","r",encoding="utf-8")
+                d = open(f"{sss}/system/new.oup","r",encoding="utf-8")
                 d = d.read()
                 s = open("DS-DOS.py","w",encoding="utf-8")
                 s.write(d)
