@@ -1,0 +1,166 @@
+import configparser,subprocess,os,urllib.request,glob,sys
+os.system("title Sovit OS && cls")
+sss = "ST"
+path = '*.bat'
+config = configparser.ConfigParser()
+config.read(f'{sss}/system/config.zs')
+
+store = configparser.ConfigParser()
+st = "ST/"
+
+def vprint(s):
+    [print(p) for p in s]
+def install(app,k):
+    try:
+        d = store["Defalt"][app]
+        urllib.request.urlretrieve(d,f"{sss}/{app}.{k}")
+    except KeyError as e:
+        print(f"{app}は存在しません")
+
+
+
+        
+while True:
+    c = input(f"sovit-{st}>")
+    if c == "nam":
+        print("""Nap Application Manager 13
+Loading...
+        """)
+        assa = "store"
+        if assa == "store":
+            print("更新しています")
+            for key in config['nap']:
+                r = config["nap"][key]
+                urllib.request.urlretrieve(r, f"ST/system/store.zs")
+                store.read(f'ST/system/store.zs')
+            print("""
+アプリ一覧""")
+            for k in store['nap']:
+                print(k)
+            app = input("Select app>>")
+            try:
+                d = store["nap"][app]
+                urllib.request.urlretrieve(d, f"ST/system/appinfo.zs")
+                irepo = configparser.ConfigParser()
+                irepo.read(f'ST/system/appinfo.zs')
+                name = irepo["defalt"]["name"]
+                ver = irepo["defalt"]["ver"]
+                come = irepo["defalt"]["come"]
+                url = irepo["defalt"]["url"]
+                print(f"""Name: {name}
+Ver.{ver}
+comment:{come}""")
+                urllib.request.urlretrieve(url, f"ST/Apps/{name}.nap")
+                print("Complite")
+            except KeyError as e:
+                print(f"{app}は存在しません")
+    elif c == "cario":
+        print("""Cario Application Manager 10
+アプリケーションの起動 = app
+アプリケーションストアの起動 = store
+        """)
+        print("更新しています")
+        for key in config['cario']:
+            r = config["cario"][key]
+            urllib.request.urlretrieve(r, f"ST/system/store.zs")
+            store.read("ST/system/store.zs")
+        print("""
+アプリ一覧""")
+        for key in store['Defalt']:
+            print(key)
+        app = input("インストールするアプリ名>>")
+        pac = "nap"
+        try:
+            d = store["Defalt"][app]
+            urllib.request.urlretrieve(d,f"ST/Apps/{app}.{pac}")
+            print("Complite")
+        except KeyError as e:
+            print(f"{app}は存在しません")
+    elif c == "system":
+        v = config["Defalt"]["Ver"]
+        print(f"""
+Sovit {v}
+Build 202181907
+<systemapp>
+Cario Application Manager 10
+Nap Application Manager 13
+Sovit Filer
+<Extensions>
+Sovit Filer ServicePack2
+Nap-Loder
+Cario-Loder
+Sap-Loder
+""")
+    elif c == "ls":
+        print(f"{st}を取得します Sovit Filerの制御下にあります")
+        files = os.listdir(st)
+        vprint(files)
+    elif c == "cd":
+        print("アクティブディレクトリディレクトリを移動します")
+        ss = input("ディレクトリ名を入力してください>>")
+        st = st + ss + "/"
+        print(f"{st}に移動しました")
+    elif c == "rcd":
+        print("アクティブディレクトリをSTにしました")
+        st = "ST/"
+    elif c == "oup" or c == "update":
+        print("Online update program")
+        print("しばらくお待ちください")
+        urllib.request.urlretrieve("https://raw.githubusercontent.com/amania-Gostd/Gostd/main/aup.ini", f"{sss}/system/aup.zs")
+        aup = configparser.ConfigParser()
+        aup.read(f'{sss}/system/aup.zs')
+        if config["Defalt"]["Ver"] < aup["Defalt"]["New-Ver"]:
+            v = aup["Defalt"]["New-Ver"]
+            print("最新バージョンが存在しています")
+            print(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF")
+            urllib.request.urlretrieve(f"https://raw.githubusercontent.com/amania-Gostd/Gostd/main/{v}.AUIF", f"{sss}/system/new.oup")
+            print("ダウンロードが完了しました　インストールしますか(y)")
+            if input(">>>") == "y":
+                d = open(f"{sss}/system/new.oup","r",encoding="utf-8")
+                d = d.read()
+                s = open("DS-DOS.py","w",encoding="utf-8")
+                s.write(d)
+                s.close()
+                config.optionxform = lambda option: option
+                config['Defalt'] = {}
+                config.set("Defalt", "Ver", aup["Defalt"]["New-Ver"])
+                s = open(f'{sss}/system/config.zs',"w",encoding="utf-8")
+                config.write(s)
+                s.close()
+        elif config["Defalt"]["Ver"] >= aup["Defalt"]["New-Ver"]:
+            print("すでに最新バージョンです")
+    elif c == "setting":
+        v = config["Defalt"]["Ver"]
+        print("setting")
+        print("""
+(1)Pach-Apps:アクティブディレクトリを使用してアプリケーションを選択するかAppsフォルダから起動するかを選択できます 標準はTrueです""")
+        s = input("番号を選択>")
+        if s == "1":
+            a = config["Defalt"]["Pach-Apps"]
+            print(f"現在の設定:{a}")
+            c = input("変更しますか？(y)")
+            if c == "y":
+                c = input("Trueを入力すると有効になりますそれ以外は無効になります")
+                config.optionxform = lambda option: option
+                config['Defalt'] = {}
+                config.set("Defalt", "Pach-Apps", c)
+                config.set("Defalt", "Ver", v)
+                s = open(f'{sss}/system/config.zs',"w",encoding="utf-8")
+                config.write(s)
+                s.close()
+    else:
+        try:
+            if config["Defalt"]["Pach-Apps"] == "True":
+                t = os.path.exists(f'ST/Apps/{c}.nap')
+                if t == True:
+                    os.system(f"python ST/Apps/{c}.nap")
+                else:
+                    raise IOError
+            else:
+                t = os.path.exists(f'{st}{c}.nap')
+                if t == True:
+                    os.system(f"python {st}{c}.nap")
+                else:
+                    raise IOError
+        except IOError as e:
+                    pass
